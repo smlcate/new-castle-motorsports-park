@@ -11,7 +11,7 @@ app.controller('mainCtrl', ['$scope', '$http', function($scope, $http) {
 
     $scope.weather = weather;
 
-    console.log($scope.weather);
+    // console.log($scope.weather);
   })
 
 }])
