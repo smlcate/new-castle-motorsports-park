@@ -1,12 +1,72 @@
 <html>
 <head>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.js"></script>
-  <script src="./javascripts/app.js" charset="utf-8"></script>
-  <script src="./javascripts/controllers/mainCtrl.js" charset="utf-8"></script>
+  <script defer src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/1.0.3/angular-ui-router.min.js" charset="utf-8"></script>
+  <script defer src="./javascripts/app.js" charset="utf-8"></script>
+  <script defer src="./javascripts/controllers/mainCtrl.js" charset="utf-8"></script>
+
+  <link rel="stylesheet" href="/stylesheets/style.css">
+  
 </head>
 <body ng-app="mainApp" ng-controller="mainCtrl">
 
-  {{ greeting }}
+  <header>
+    <div id="mainHeader">
+
+      <!-- Main logo and track information -->
+
+      <h1>NCMP</h1>
+
+      <div id="trackInfoDiv">
+
+        <!-- Weather, Address, Hours, Track Status(open, closed), and Contact Info -->
+
+        <div class="trackInfoDivRow">
+
+          <p>New Castle, Indiana</p>
+          <a href="#">Directions</a>
+          <p>Phone ###</p>
+
+        </div>
+
+        <div class="trackInfoDivRow">
+
+          <h5>Track Weather</h5>
+          <p>{{ weather.feelslike_f }}°f / {{ weather.feelslike_c }}°c</p>
+          <img ng-src="{{weather.icon_url}}" alt="">
+
+        </div>
+
+
+      </div>
+
+    </div>
+    <nav id="mainNav">
+
+      <ul>
+        <li>
+          <a href="/#!/kartowners">Kart Owners</a>
+        </li>
+        <li>
+          <a href="/#!/kartrentals" >Kart Rentals</a>
+        </li>
+        <li>
+          <a href="/#!/hours" >Hours</a>
+        </li>
+        <li>
+          <a href="/#!/events" >Events</a>
+        </li>
+        <li>
+          <a href="/" >About</a>
+        </li>
+      </ul>
+
+    </nav>
+  </header>
+
+  <div ui-view>
+
+  </div>
 
 </body>
 </html>

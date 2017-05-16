@@ -1,7 +1,35 @@
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0px;
 }
+
+header {
+  padding: 25px;
+  border: 1px solid black;
+  width: 98%;
+  margin-top: -7px;
+  display: flex;
+  flex-direction: column;
+}
+
+header #mainHeader {
+  display: flex;
+  justify-content: space-between;
+}
+
+header #mainHeader #trackInfoDiv {
+  display: flex;
+  flex-direction: column;
+}
+
+header #mainHeader #trackInfoDiv .trackInfoDivRow {
+  display: flex;
+  align-items: center;
+  
+}
+
 
 a {
   color: #00B7FF;
