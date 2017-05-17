@@ -202,11 +202,12 @@ header #mainNav ul li {
 }
 
 #pricesPar {
-  width: 100vw;
-  height: 70vh;
+  width: 98vw;
+  /*height: 70vh;*/
   /*background: #f5f5f5;*/
   /*margin-top: -55px;*/
-  background: url('../images/The-Apex-Driver-Ben-Varner-RoboPong-200-5-1.jpg') fixed 100vw;
+  padding: 20px;
+  background: url('../images/The-Apex-Driver-Ben-Varner-RoboPong-200-5-1.jpg') fixed 80vw;
   background-position: center;
   background-repeat: no-repeat;
   display: flex;
@@ -216,9 +217,39 @@ header #mainNav ul li {
 
 #pricesParInfo {
   width: 80%;
-  background: #212121;
-  opacity: 0.8;
+  background: #1A237E;
+  opacity: 0.9;
   color: #f5f5f5;
+  font-size: 100%;
+  padding: 50px;
+}
+
+#pricesParInfo li {
+  list-style: none;
+}
+
+#pitSpotPar {
+  /*width: 98vw;*/
+  background: url('../images/The-Apex-Driver-Ben-Varner-RoboPong-200-40-1.jpg') fixed 100vw;
+  background-position: center;
+  background-repeat: no-repeat;
+  height:100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#pitSpotParInfo {
+  width: 80%;
+  background: #212121;
+  opacity: 0.9;
+  color: #f5f5f5;
+  font-size: 100%;
+  padding: 50px;
+}
+
+#pitSpotParInfo li {
+  list-style: none;
 }
 
 
@@ -246,6 +277,22 @@ header #mainNav ul li {
 .textContainer p {
   margin-bottom: 30px;
   font-size: 100%;
+}
+
+.textContainer li {
+  list-style: none;
+  margin-bottom: 30px;
+}
+
+#rentalHeader {
+  width: 100vw;
+  background: url('../images/Karamdavis8x10.jpg') fixed 100vw;
+  background-position: center;
+  background-repeat: no-repeat;
+  height:70vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 a {
