@@ -1,5 +1,10 @@
 app.controller('mainCtrl', ['$scope', '$http', function($scope, $http) {
 
+  // $http.get('/getEvents')
+  // .then(function(res) {
+  //   console.log(res.data);
+  // })
+
   var monthNames =  ['January','February','March','April','May','June','July','August','September','October','November','December'];
   var monthDays = [31,28,31,30,31,30,31,31,30,31,30,31];
 
@@ -22,9 +27,13 @@ app.controller('mainCtrl', ['$scope', '$http', function($scope, $http) {
   $scope.selectedDate = $scope.date.date;
   $scope.selectedDay = $scope.date.day;
   $scope.selectedMonth_text = monthNames[$scope.selectedMonth];
+  $scope.events = [];
 
   function buildCalendar() {
 
+    console.log('hit 2')
+
+    console.log($scope.events);
 
     var curMonthDays = monthDays[$scope.selectedMonth];
     var prevMonthDays;
@@ -62,17 +71,62 @@ app.controller('mainCtrl', ['$scope', '$http', function($scope, $http) {
 
     var calendarDay = firstN;
 
+    var dayOfWeek = 0;
+
     for (var i = 0; i < 42; i++) {
+
+      var events = [];
+
+      if ($scope.selectedMonth < 10) {
+
+        var thisDate = $scope.selectedYear + '-0' + ($scope.selectedMonth + 1) + '-' + calendarDay + 'T04:00:00.000Z';
+
+      } else {
+
+        var thisDate = $scope.selectedYear + '-' + ($scope.selectedMonth + 1) + '-' + calendarDay + 'T04:00:00.000Z';
+
+      }
+
+      var cellBody = {
+        date: calendarDay,
+        day: dayOfWeek,
+        curMonth: false,
+        events: 'Open Practice'
+      }
+
+      if (dayOfWeek === 6) {
+        dayOfWeek = 0;
+      } else {
+
+        dayOfWeek ++;
+
+      }
+
+      // console.log(cellBody.events, 'hit 1')
+
+      // $http.post('/getEventByDate', {date: thisDate})
+      // .then(function(res) {
+      //   if (res.data[0] != 'undefined') {
+      //     cellBody.events = res.data;
+      //     console.log(cellBody)
+      //     console.log(i)
+      //     console.log(res.data);
+      //
+      //     cellBody.events = res.data[0];
+      //     console.log(cellBody.events, 'hit 2');
+      //
+      //   }
+      //
+      // })
+      // .catch(function(err) {
+      //   console.log(err);
+      // })
+
 
       if (calendarDay == prevMonthDays && i < 6) {
 
 
-        var cellBody = {
-          date: calendarDay,
-          curMonth: false
-        }
-
-
+        // console.log(cellBody)
         month_events.push(cellBody);
 
         activeMonth = true;
@@ -81,10 +135,17 @@ app.controller('mainCtrl', ['$scope', '$http', function($scope, $http) {
 
       } else if(calendarDay === curMonthDays && i > 6) {
 
-        var cellBody = {
-          date: calendarDay,
-          curMonth: true
-        }
+        // cellBody = {
+        //   date: calendarDay,
+        //   day: dayOfWeek,
+        //   curMonth: true
+        // }
+
+        cellBody.date = calendarDay;
+        cellBody.day = dayOfWeek;
+        cellBody.curMonth = true;
+
+
 
         month_events.push(cellBody)
 
@@ -97,37 +158,86 @@ app.controller('mainCtrl', ['$scope', '$http', function($scope, $http) {
 
 
 
-        var cellBody = {
-          date: calendarDay,
-          curMonth: false
-        }
+        // cellBody = {
+        //   date: calendarDay,
+        //   day: dayOfWeek,
+        //   curMonth: false
+        // }
+        cellBody.date = calendarDay;
+        cellBody.day = dayOfWeek;
+        cellBody.curMonth = false;
 
         calendarDay ++;
+
+
 
         month_events.push(cellBody);
 
       } else {
 
-        var cellBody = {
+        // cellBody = {
+        //   date: calendarDay,
+        //   curMonth: activeMonth,
+        //   day: dayOfWeek
+        // }
 
-          date: calendarDay,
-          curMonth: activeMonth,
-
-        }
+        cellBody.date = calendarDay;
+        cellBody.day = dayOfWeek;
+        cellBody.curMonth = activeMonth;
 
         calendarDay ++;
+
+
 
         month_events.push(cellBody);
       }
 
+      // console.log(cellBody)
 
     }
 
     $scope.month_events = month_events;
 
+    // console.log($scope.month_events);
+
+    for (var i = 0; i < $scope.events.length; i++) {
+
+      var date = $scope.events[i].date.slice(5,-17);
+      var dateNumber = $scope.events[i].date.slice(8,-14);
+
+      if (date[0] === 0) {
+        date.slice(1)
+      }
+      if (date[0] === 0) {
+        dateNumber.slice(1)
+        console.log(dateNumber);
+      }
+
+      console.log(date);
+
+      if ($scope.selectedMonth === date - 1) {
+
+        month_events[dateNumber -1 + (monthStartDay)].events = $scope.events[i];
+
+      }
+
+    }
+
   }
 
-  buildCalendar();
+  function getEvents() {
+    console.log('hit 1');
+    $http.get('/getEvents')
+    .then(function(res) {
+      $scope.events = res.data;
+
+      buildCalendar();
+    })
+  }
+
+  getEvents();
+
+
 
   $scope.nextMonth = function() {
 
@@ -143,7 +253,7 @@ app.controller('mainCtrl', ['$scope', '$http', function($scope, $http) {
     }
 
     $scope.selectedMonth_text = monthNames[$scope.selectedMonth];
-    buildCalendar();
+    getEvents();
   }
 
   $scope.prevMonth = function() {
@@ -160,7 +270,7 @@ app.controller('mainCtrl', ['$scope', '$http', function($scope, $http) {
     }
 
     $scope.selectedMonth_text = monthNames[$scope.selectedMonth];
-    buildCalendar();
+    getEvents();
   }
 
   $http.get('https://api.wunderground.com/api/7c8eaaf84b5e5dd0/conditions/q/IN/New_Castle.json')
