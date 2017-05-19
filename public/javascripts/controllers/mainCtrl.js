@@ -18,6 +18,9 @@ app.controller('mainCtrl', ['$scope', '$http', function($scope, $http) {
   }
 
   $scope.selectedMonth = $scope.date.month;
+  $scope.selectedYear = $scope.date.year;
+  $scope.selectedDate = $scope.date.date;
+  $scope.selectedDay = $scope.date.day;
   $scope.selectedMonth_text = monthNames[$scope.selectedMonth];
 
   function buildCalendar() {
@@ -39,7 +42,7 @@ app.controller('mainCtrl', ['$scope', '$http', function($scope, $http) {
 
     function getMonthStartDate() {
 
-      monthStartDay = new Date(monthNames[$scope.selectedMonth] + " 1," + $scope.date.year).getDay();
+      monthStartDay = new Date(monthNames[$scope.selectedMonth] + " 1," + $scope.selectedYear).getDay();
 
       if (monthStartDay == 0) {
         firstN = 1;
@@ -108,7 +111,7 @@ app.controller('mainCtrl', ['$scope', '$http', function($scope, $http) {
         var cellBody = {
 
           date: calendarDay,
-          curMonth: activeMonth
+          curMonth: activeMonth,
 
         }
 
@@ -131,6 +134,7 @@ app.controller('mainCtrl', ['$scope', '$http', function($scope, $http) {
     if ($scope.selectedMonth == 11) {
 
       $scope.selectedMonth = 0;
+      $scope.selectedYear ++;
 
     } else {
 
@@ -146,7 +150,8 @@ app.controller('mainCtrl', ['$scope', '$http', function($scope, $http) {
 
     if ($scope.selectedMonth == 0) {
 
-      $scope.selectedMonth = 12;
+      $scope.selectedMonth = 11;
+      $scope.selectedYear --;
 
     } else {
 
