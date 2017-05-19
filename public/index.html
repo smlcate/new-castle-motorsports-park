@@ -2,15 +2,18 @@
 <head>
 
   <script
-    defer src="http://code.jquery.com/jquery-3.2.1.min.js"
+    defer src="https://code.jquery.com/jquery-3.2.1.min.js"
     integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
     crossorigin="anonymous"></script>
   <script defer src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.js"></script>
   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/1.0.3/angular-ui-router.min.js" charset="utf-8"></script>
+  <!-- <script defer src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js
+" charset="utf-8"></script> -->
   <script defer src="./javascripts/app.js" charset="utf-8"></script>
   <script defer src="./javascripts/controllers/mainCtrl.js" charset="utf-8"></script>
 
   <link rel="stylesheet" href="/stylesheets/style.css">
+  <link href="/images/glyphicons_free">
 
 </head>
 <body ng-app="mainApp" ng-controller="mainCtrl">
@@ -19,7 +22,7 @@
 
     <div id="mainLogoDiv">
 
-      <img src="./images/NEW-CASTLE-MOTORSPORTS-PARK.png"></img>
+      <a href="/"><img src="./images/NEW-CASTLE-MOTORSPORTS-PARK.png"></img></a>
 
     </div>
 
@@ -42,7 +45,7 @@
 
         <div class="trackInfoDivRow">
 
-          <p>Track Weather</p>
+          <a>Track Weather</a>
           <p>{{ weather.feelslike_f }}°f / {{ weather.feelslike_c }}°c</p>
           <p>{{ weather.weather }}</p>
           <img ng-src="{{weather.icon_url}}" alt="">
@@ -84,6 +87,14 @@
   <div ui-view id="mainView">
 
   </div>
+  <footer>
+    <nav class="" id="socialMediaNav">
+      <a href="https://www.facebook.com/NewCastleMotorsportsPark"><img src="/images/icon_facebook-blue.png" alt=""></a>
+      <a href="https://www.facebook.com/NewCastleMotorsportsPark"><img src="/images/icon_twitter-blue.png" alt=""></a>
+      <a href="https://www.facebook.com/NewCastleMotorsportsPark"><img src="/images/icon_youtube-blue.png" alt=""></a>
+      <a href="https://www.facebook.com/NewCastleMotorsportsPark"><img src="/images/icon_instagram-blue.png" alt=""></a>
+    </nav>
+  </footer>
 
 </body>
 </html>

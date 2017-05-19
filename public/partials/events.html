@@ -1,1 +1,43 @@
 <h1>Events</h1>
+
+<div class="" id="calendarDiv">
+
+  <div class="" id="calendarNav">
+
+    <div class="" id="monthDisplay">
+
+      <h3>{{ selectedMonth_text }}</h3>
+
+      <nav>
+
+        <button type="button" name="button" ng-click="prevMonth()"><</button>
+        <button type="button" name="button" ng-click="nextMonth()">></button>
+
+      </nav>
+
+    </div>
+
+  </div>
+
+
+
+  <ul class=""id="calendarHeader">
+    <li>SUN</li>
+    <li>MON</li>
+    <li>TUE</li>
+    <li>WED</li>
+    <li>THU</li>
+    <li>FRI</li>
+    <li>SAT</li>
+  </ul>
+  <div class=""id="calendarView">
+
+    <div class="calendarCell{{event.curMonth}}" ng-repeat="event in month_events">
+
+      {{ event.date }}
+
+    </div>
+
+  </div>
+
+</div>
