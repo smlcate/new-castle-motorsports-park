@@ -49,22 +49,16 @@ app.controller('mainCtrl', ['$scope', '$http', function($scope, $http) {
 
     var activeMonth = false;
 
-    function getMonthStartDate() {
+    monthStartDay = new Date(monthNames[$scope.selectedMonth] + " 1," + $scope.selectedYear).getDay();
 
-      monthStartDay = new Date(monthNames[$scope.selectedMonth] + " 1," + $scope.selectedYear).getDay();
-
-      if (monthStartDay == 0) {
-        firstN = 1;
-        activeMonth = true;
-      } else if(monthStartDay == 1) {
-        firstN = prevMonthDays;
-      } else {
-        firstN = prevMonthDays - (monthStartDay-1);
-      }
-
+    if (monthStartDay == 0) {
+      firstN = 1;
+      activeMonth = true;
+    } else if(monthStartDay == 1) {
+      firstN = prevMonthDays;
+    } else {
+      firstN = prevMonthDays - (monthStartDay-1);
     }
-
-    getMonthStartDate();
 
 
     var month_events = [];
@@ -91,16 +85,25 @@ app.controller('mainCtrl', ['$scope', '$http', function($scope, $http) {
         date: calendarDay,
         day: dayOfWeek,
         curMonth: false,
-        events: 'Open Practice'
+        events: []
       }
 
-      if (dayOfWeek === 6) {
+      if(dayOfWeek == 1) {
+        cellBody.events.push(
+          {name:'Track Closed'}
+        )
+      } else if (dayOfWeek === 6) {
         dayOfWeek = 0;
+        cellBody.events.push(
+          {name:'Open Practice'}
+        )
       } else {
-
-        dayOfWeek ++;
-
+        cellBody.events.push(
+          {name:'Open Practice'}
+        )
       }
+
+      dayOfWeek ++;
 
       // console.log(cellBody.events, 'hit 1')
 
@@ -188,7 +191,6 @@ app.controller('mainCtrl', ['$scope', '$http', function($scope, $http) {
         calendarDay ++;
 
 
-
         month_events.push(cellBody);
       }
 
@@ -217,7 +219,9 @@ app.controller('mainCtrl', ['$scope', '$http', function($scope, $http) {
 
       if ($scope.selectedMonth === date - 1) {
 
-        month_events[dateNumber -1 + (monthStartDay)].events = $scope.events[i];
+
+        month_events[dateNumber -1 + (monthStartDay)].events.push($scope.events[i]);
+        month_events[dateNumber -1 + (monthStartDay)].events[0] = null;
 
       }
 

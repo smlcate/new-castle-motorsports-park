@@ -32,13 +32,15 @@
   </ul>
   <div class=""id="calendarView">
 
-    <div class="calendarCell{{event.curMonth}}" ng-repeat="event in month_events track by $index">
+    <div class="calendarCell{{day.curMonth}}" ng-repeat="day in month_events track by $index">
 
-      {{ event.date }}
+      {{ day.date }}
 
-      {{ event.events.name }}
+      <div class="eventCell" ng-repeat="event in day.events">
 
-      {{ event.events.date }}
+        {{event.name}}
+
+      </div>
 
     </div>
 
