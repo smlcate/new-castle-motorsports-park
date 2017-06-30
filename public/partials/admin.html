@@ -1,0 +1,137 @@
+<h1>Admin Events Page</h1>
+
+<div class="" id="calendarDiv">
+
+  <div class="" id="calendarNav">
+
+    <div class="" id="monthDisplay">
+
+      <h3>{{ selectedMonth_text }} {{ selectedYear }}</h3>
+
+      <nav>
+
+        <button type="button" name="button" ng-click="prevMonth()"><</button>
+        <button type="button" name="button" ng-click="nextMonth()">></button>
+
+      </nav>
+
+    </div>
+
+    <div id="adminControlDiv">
+
+
+      <!-- <span>Event</span><input type="checkbox" id="event" value="{{eventChkBox}}" ng-model="event" ng-change="event"> -->
+      <div id="adminControlInputDiv">
+
+        <span>Repeating Event<input type="checkbox" id="seriesChkBox" value="" ng-model="eventInfo.series" ng-click="toggleSeries()"></span>
+        <span ng-if="eventInfo.series===true">New Repeating Event<input type="checkbox" id="newSeriesChkBox" value="" ng-model="eventInfo.newSeries" ng-click="toggleNewSeries()"></span>
+
+        <div id="seriesSelectDiv">
+
+          <div class="dropdown">
+            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+              Series
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+              <li ng-click="selectSeries('None')"><a>None</a></li>
+              <li ng-repeat="group in eventInfo.event_groups" ng-click="selectSeries(group.name,group)"><a >{{group.name}}</a></li>
+              <!-- <li role="separator" class="divider"></li>
+              <li><a href="#">Separated link</a></li> -->
+            </ul>
+          </div>
+
+          <h5>{{eventInfo.selectedSeries}}</h5>
+
+
+        </div>
+
+
+
+        <span>Name<input type="text" id="eventNameInput" value="{{eventInfo.input.name}}" ng-model="eventInfo.input.name" ng-click=""></span>
+
+        <span>Color<input type="color" id="eventColorInput" value="" ng-model="eventInfo.input.color" ng-click=""></span>
+
+        <p>Description</p>
+        <textarea type="text" id="eventDescriptionInput" name="" value="" ng-model="eventInfo.input.description"></textarea>
+
+        <span>
+
+          <!-- <input type="text" datetime="yyyy-MM-dd HH:mm:ss" ng-model="myDate"> -->
+
+          <span>Start Date<input type="date" id="eventStartDateInput" value="" ng-model="eventInfo.input.startDate" ng-click=""></span>
+
+          <span id="endDateSpan">End Date<input type="date" id="eventEndDateInput" value="" ng-model="eventInfo.input.endDate" ng-click=""></span>
+
+          <span>Single Day<input type="checkbox" id="singleDayChkBox" value="" ng-model="eventInfo.singleDay" ng-click="toggleDays()"></span>
+
+
+        </span>
+        <span>
+
+          <span>Start Time<input type="time" id="eventStartTimeInput" value="" ng-model="eventInfo.input.startTime" ng-click=""></span>
+
+          <span id="endTimeSpan">End Time<input type="time" id="eventEndTimeInput" value="" ng-model="eventInfo.input.endTime" ng-click=""></span>
+
+        </span>
+
+        <button type="button" name="button" id="addSeriesEventBtn" ng-click="addSeriesEvent(eventInfo.input)">Add Date</button>
+
+
+        <button type="button" name="button" ng-click="submitEvent()">Add</button>
+
+
+      </div>
+
+      <div id="seriesEventDateList">
+
+        <p ng-repeat="event in eventInfo.events track by $index">
+          {{event.displayDate}} - {{event.displayEndDate}}
+        </p>
+
+      </div>
+
+      <!-- <div class="" id="selectedDayDiv">
+
+
+        {{ selectedObject.day }}, {{ selectedObject.month }} {{ selectedObject.date }}
+
+        {{ selectedObject }}
+
+      </div> -->
+
+    </div>
+
+
+
+
+  </div>
+
+
+
+  <ul class=""id="calendarHeader">
+    <li>SUN</li>
+    <li>MON</li>
+    <li>TUE</li>
+    <li>WED</li>
+    <li>THU</li>
+    <li>FRI</li>
+    <li>SAT</li>
+  </ul>
+  <div class=""id="calendarView">
+
+    <div class="calendarCell{{day.curMonth}}" ng-repeat="day in month_events track by $index" ng-click="selectDay(day)">
+
+      {{ day.date }}
+
+      <div class="eventCell" ng-repeat="event in day.events" style="background:{{event.color}}" ng-click="selectEvent(event)">
+
+        {{event.name}}
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

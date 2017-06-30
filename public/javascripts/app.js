@@ -26,6 +26,17 @@ app.config(function($stateProvider, $urlRouterProvider) {
         url: '/events',
         templateUrl: './partials/events.html'
     })
-
+    .state('adminlogin', {
+        url: '/adminlogin',
+        templateUrl: './partials/adminLogin.html'
+    })
+    .state('admincalendar', {
+        url: '/adminevents',
+        templateUrl: './partials/admin.html'
+    })
+    .state('weather', {
+        url: '/weather',
+        templateUrl: './partials/weather.html'
+    })
 
 })

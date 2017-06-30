@@ -3,7 +3,7 @@ body {
   flex-direction: column;
   align-items: center;
   padding: 0px;
-  background: #212121;
+  background: #f5f5f5;
   font-family: sans-serif;
 }
 
@@ -13,9 +13,9 @@ a {
 
 header {
   padding: 25px;
-  border-bottom: 1px solid black;
-  width: 98%;
-  height: 60px;
+  border-bottom: 3px solid #1A237E;
+  width: 100%;
+  height: 140px;
   margin-top: -7px;
   display: flex;
   /*flex-direction: column;*/
@@ -96,7 +96,8 @@ header #mainNav ul li {
 
 #mainView {
   width: 100vw;
-  background: #212121;
+  background: #f5f5f5;
+  color: black;
   padding: 0px;
   display: flex;
   /*justify-content: center;*/
@@ -121,12 +122,47 @@ header #mainNav ul li {
   height: 100vh;
   /*border: 1px solid black;*/
   display: flex;
-  justify-content: space-around;
+  flex-direction: column;
+  /*justify-content: space-around;*/
   align-items: center;
 }
 
 #welcomeInfo {
 }
+
+.curDayInfoDiv {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 700px;
+}
+
+.curWeatherDiv {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  background: rgba(0,0,0,0.5);
+  box-shadow: 0px 1px 3px 1px rgba(0,0,0,0.5);
+
+}
+
+.curDayEventDiv {
+  min-width: 200px;
+
+  max-width: 400px;
+  min-height: 150px;
+  padding: 20px;
+  background: rgba(0,0,0,0.5);
+  color: #f5f5f5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0px 1px 3px 1px rgba(0,0,0,0.5);
+  /*opacity: .5;*/
+}
+
 
 .contentMedian {
   display: flex;
@@ -176,16 +212,30 @@ header #mainNav ul li {
 
 .pageHeader h1 {
   height: 125px;
-  color: white;
+  color: black;
   font-size: 500%;
   text-align: center;
   padding: 60px;
   text-shadow: 1px 2px black;
 }
 
+#ownersPageNav {
+  position: fixed;
+  align-self: flex-end;
+  display: flex;
+  flex-direction: column;
+  width: 150px;
+  background: #212121;
+  opacity: 0.9;
+  margin-left: -20px;
+  padding: 10px;
+  z-index: 200;
+  order: 2;
+}
+
 #ownersPage {
   width: 100vw;
-  height: 70vh;
+  height: 52vh;
   /*background: #f5f5f5;*/
   /*margin-top: -55px;*/
   background: url('../images/The-Apex-Driver-Ben-Varner-RoboPong-200-36-1.jpg') fixed 100vw;
@@ -225,10 +275,10 @@ header #mainNav ul li {
 
 #pricesParInfo {
   width: 80%;
-  background: #1A237E;
+    background: #1A237E;
   opacity: 0.9;
   color: #f5f5f5;
-  font-size: 100%;
+  font-size: 130%;
   padding: 50px;
 }
 
@@ -241,10 +291,12 @@ header #mainNav ul li {
   background: url('../images/The-Apex-Driver-Ben-Varner-RoboPong-200-40-1.jpg') fixed 100vw;
   background-position: center;
   background-repeat: no-repeat;
-  height:100vh;
+  /*height:100vh;*/
+  padding: 100px;
   display: flex;
   justify-content: center;
   align-items: center;
+  /*overflow-y: scroll;*/
 }
 
 #pitSpotParInfo {
@@ -252,7 +304,7 @@ header #mainNav ul li {
   background: #212121;
   opacity: 0.9;
   color: #f5f5f5;
-  font-size: 100%;
+  font-size: 130%;
   padding: 50px;
 }
 
@@ -261,14 +313,71 @@ header #mainNav ul li {
 }
 
 
+#corporateInfoDiv {
+  height: 60vh;
+  background: url('../images/KKncmp2012_1.jpg') fixed 100%;
+  display: flex;
+  justify-content: center;
+  padding: 50px;
+}
+#corporateInfo {
+  width: 90%;
+  background: #212121;
+  color: #f5f5f5;
+  padding: 30px;
+  opacity: 0.9;
+  border-radius: 5px;
+  box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.7);
+}
 
+.classInfoDiv {
+  border-bottom: 1px solid white;
+}
+
+#seriesFormatInfoDiv {
+  width: 100%;
+  font-size: 130%;
+}
+
+#classInfoPar {
+  /*height: 60vh;*/
+  background: url('../images/KKncmp2012_1.jpg') fixed 100%;
+  display: flex;
+  justify-content: center;
+  padding: 50px;
+  /*z-index: 100;*/
+  /*transform: translateZ(-1px);*/
+}
+
+#classInfoDivContainer {
+  /*border-bottom: 1px solid white;   */
+}
+#classInfoParInfo {
+  width: 80%;
+  background: #1A237E;
+  color: #f5f5f5;
+  padding: 30px;
+  opacity: 0.9;
+  border-radius: 5px;
+  box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.7);
+  /*z-index: 200;*/
+  /*transform: translateZ(0)*/
+}
 
 .contentDiv {
   /*width: 100vw;*/
   padding: 30px;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  color: black;
+  /*justify-content: center;*/
+
   background: #f5f5f5;
+  /*font-size: 150%;*/
+}
+
+.contentDiv li {
+  list-style: none;
 }
 
 .contentDiv h3 {
@@ -295,12 +404,12 @@ header #mainNav ul li {
 }
 
 #rentalHeader {
-  width: 91vw;
+  width: 100%;
   color: white;
   /*font-size: 200%;*/
   /*height: 125px;*/
   color: white;
-  font-size: 300%;
+  font-size: 5  00%;
   text-align: center;
   padding: 60px;
   text-shadow: 1px 2px black;
@@ -313,18 +422,30 @@ header #mainNav ul li {
   align-items: center;
 }
 
+#selectedDayDiv {
+  width: 600px;
+  color: black;
+  background: #11f1;
+  display: flex;
+  justify-content: center;
+  border: 2px solid #1A237E;
+  padding: 20px;
+  font-size: 130%;
+}
+
 #calendarDiv {
   width: 90vw;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   padding: 50px;
+  color:black;
 }
 
 #calendarView {
   display: flex;
   flex-wrap: wrap;
-  width: 100%;
+  width: 1100px;
   justify-content: center;
 }
 
@@ -350,32 +471,166 @@ header #mainNav ul li {
   background: none;
   border: none;
   font-size: 200%;
-  color: white;
+  color: black;
 }
 
 #calendarNav {
   display: flex;
-  color: white;
+  flex-direction: column;
+  color: black;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
 }
 
 #monthDisplay {
-  color: white;
+  color: black;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
 #calendarDiv .calendarCelltrue {
-  height: 150px;
+  height: 100px;
   width: 150px;
   background: #f5f5f5;
-  border: 1px solid lightgrey;
+  border: 1px solid grey;
+  margin-left: -1px;
+  margin-top: -1px;
+  color: black;
 }
 #calendarDiv .calendarCellfalse {
-  height: 150px;
+  height: 100px;
   width: 150px;
-  background: grey;
-  border: 1px solid lightgrey;
+  background: #E0E0E0;
+
+  border: 1px solid grey;
+  margin-left: -1px;
+  margin-top: -1px;
+}
+
+#currentWeatherDisplay {
+  color: black;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: center;
+  font-size: 20px;
+  background: #f5f5f5;
+}
+#currentWeather {
+  width: 600px;
+  display: flex;
+  justify-content: space-around;
+}
+
+#weatherForecastDiv {
+  color: black;
+  width: 90%;
+  /*height: 80vh;*/
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  background: #212121;
+  overflow-x: scroll;
+  padding: 20px;
+}
+
+.forecastCell {
+  /*color: white;*/
+  background: #f5f5f5;
+  padding: 10px;
+  margin-bottom: 10px;
+  width: 225px;
+}
+
+.forecastCellInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.forecastCellHeader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid lightgrey;
+}
+
+#adminLoginPage {
+  width: 100%;
+  height: 80%;
+  display: flex;
+  justify-content: center;
+  padding: 100px;
+}
+
+#loginDisplay {
+  width: 500px;
+  background: #f5f5f5;
+  font-size:150%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 30px;
+}
+.inputLine {
+  display: flex;
+  justify-content: space-around;
+}
+
+#loginDisplay input {
+  height: 60px;
+  width: 70%;
+  font-size: 150%;
+}
+
+#loginDisplay p {
+  /*height: 100px;*/
+}
+
+#adminControlDiv {
+  display: flex;
+  width: 75%;
+  /*flex-direction: column;*/
+}
+
+#adminControlDiv span {
+  display: flex;
+  flex-direction: row;
+}
+
+#adminControlInputDiv {
+  width: 100%;
+}
+
+#adminControlInputDiv input {
+  color: black;
+}
+#adminControlInputDiv textarea {
+  color: black;
+  font-size: 1.5em;
+}
+#seriesSelectDiv {
+  display: flex;
+  flex-direction: column;
+}
+
+#eventDescriptionInput {
+  height: 120px;
+  text-align: left;
+  display: flex;
+  width: 100%;
+}
+
+#addSeriesEventBtn {
+  display: none;
+}
+
+#seriesEventDateList {
+  width: 25%;
+  border-left: 1px solid grey;
 }
 
 footer {
@@ -383,8 +638,10 @@ footer {
   height: 45vh;
   background: #F5F5F5;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  border-top: 3px solid #1A237E;
 }
 
 footer #socialMediaNav {
@@ -396,6 +653,14 @@ footer #socialMediaNav {
 footer #socialMediaNav img {
   height: 60px;
   width: 60px;
+  color: #1A237E;
+}
+
+footer #footerNav {
+  padding: 50px;
+  display: flex;
+  justify-content: space-around;
+  width: 600px;
 }
 
 a {

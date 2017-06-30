@@ -1,16 +1,24 @@
 <html>
 <head>
 
-  <!-- <script
-    defer src="https://code.jquery.com/jquery-3.2.1.min.js"
-    integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-    crossorigin="anonymous"></script> -->
   <script defer src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.js"></script>
   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/1.0.3/angular-ui-router.min.js" charset="utf-8"></script>
+  <script
+  defer src="https://code.jquery.com/jquery-3.2.1.js"
+  integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+  crossorigin="anonymous"></script>
+
+  <!-- Latest compiled and minified JavaScript -->
+  <script defer src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
   <!-- <script defer src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js
 " charset="utf-8"></script> -->
   <script defer src="./javascripts/app.js" charset="utf-8"></script>
   <script defer src="./javascripts/controllers/mainCtrl.js" charset="utf-8"></script>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
   <link rel="stylesheet" href="/stylesheets/style.css">
   <link href="/images/glyphicons_free">
@@ -53,26 +61,24 @@
         </div>
 
 
-
-
-
-
-
       </div>
       <nav id="mainNav">
 
         <ul>
           <li>
-            <a href="/#!/kartowners">Kart Owners</a>
+            <a href="/#!/kartowners" >Kart Owners</a>
           </li>
           <li>
             <a href="/#!/kartrentals" >Kart Rentals</a>
           </li>
-          <li>
+          <!-- <li>
             <a href="/#!/hours" >Hours</a>
+          </li> -->
+          <li>
+            <a href="/#!/events" >Calendar</a>
           </li>
           <li>
-            <a href="/#!/events" >Events</a>
+            <a href="/#!/weather">Weather</a>
           </li>
           <li>
             <a href="/" >About</a>
@@ -86,13 +92,34 @@
 
   <div ui-view id="mainView">
 
+
+
   </div>
+
+
+
   <footer>
     <nav class="" id="socialMediaNav">
       <a href="https://www.facebook.com/NewCastleMotorsportsPark"><img src="/images/icon_facebook-blue.png" alt=""></a>
       <a href="https://www.facebook.com/NewCastleMotorsportsPark"><img src="/images/icon_twitter-blue.png" alt=""></a>
       <a href="https://www.facebook.com/NewCastleMotorsportsPark"><img src="/images/icon_youtube-blue.png" alt=""></a>
       <a href="https://www.facebook.com/NewCastleMotorsportsPark"><img src="/images/icon_instagram-blue.png" alt=""></a>
+    </nav>
+    <nav id="footerNav">
+
+      <a href="/#!/kartowners">Kart Owners</a>
+
+      <a href="/#!/kartrentals" >Kart Rentals</a>
+
+      <a href="/#!/hours" >Hours</a>
+
+      <a href="/#!/events" >Events</a>
+
+      <a href="/" >About</a>
+
+      <a href="/#!/adminlogin">Admin</a>
+
+
     </nav>
   </footer>
 

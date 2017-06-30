@@ -1,8 +1,21 @@
 <h1>Events</h1>
 
+
 <div class="" id="calendarDiv">
 
+
   <div class="" id="calendarNav">
+    <div class="" id="selectedDayDiv" ng-if="selectedObject">
+
+      <div ng-repeat="object in selectedObject.events">
+
+        <h3>{{object.name}}</h3>
+
+        {{object.description}}
+
+      </div>
+
+    </div>
 
     <div class="" id="monthDisplay">
 
@@ -16,6 +29,7 @@
       </nav>
 
     </div>
+
 
   </div>
 
@@ -32,11 +46,11 @@
   </ul>
   <div class=""id="calendarView">
 
-    <div class="calendarCell{{day.curMonth}}" ng-repeat="day in month_events track by $index">
+    <div class="calendarCell{{day.curMonth}}" ng-repeat="day in month_events track by $index" ng-click="selectDay(day)">
 
       {{ day.date }}
 
-      <div class="eventCell" ng-repeat="event in day.events">
+      <div class="eventCell" ng-repeat="event in day.events" style="background:{{event.color}}">
 
         {{event.name}}
 

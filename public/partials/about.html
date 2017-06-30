@@ -4,6 +4,36 @@
 
   <div class="parallax-inner" id=welcomeInfo>
 
+    <h2>Welcome to New Castle Motorsorts Park's website</h2>
+
+    <h3>{{ date.month_text }} {{ date.date }}, {{ date.year }}</h3>
+
+
+    <div class="curDayInfoDiv">
+
+      <div class="curDayEventDiv" ng-repeat="event in currentDaysEvents" style="border:2px solid {{event.color}}">
+
+        <h2>{{ event.name }}</h2>
+
+        <p>{{ event.description }}</p>
+
+        <h4 ng-if="event.start_time">{{ event.start_time }} - {{ event.end_time }}</h4>
+
+        <h3 ng-if="event.rentalKarts === true">Rental Karts Avaliable</h3>
+
+      </div>
+
+      <div class="curWeatherDiv">
+
+        <h2>Current Weather</h2>
+
+        <h1>{{ weather.feelslike_f }}°f / {{ weather.feelslike_c }}°c</h1>
+        <h3>{{ weather.weather }}</h3>
+        <img ng-src="{{weather.icon_url}}" alt="">
+
+      </div>
+
+    </div>
 
 
 
@@ -27,16 +57,8 @@
 
   <div class="parallax-inner" id="eventInfo">
 
-    <h1>Event</h1>
-    <h1>Event</h1>
-    <h1>Event</h1>
-    <h1>Event</h1>
-    <h1>Event</h1>
-    <h1>Event</h1>
-    <h1>Event</h1>
-    <h1>Event</h1>
-    <h1>Event</h1>
-    <h1>Event</h1>
+    <h1 ng-repeat="event in eventsAfterToday | orderBy:'date'">{{event}}</h1>
+
 
 
   </div>

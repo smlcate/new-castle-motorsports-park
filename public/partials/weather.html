@@ -1,0 +1,41 @@
+<h1>Weather</h1>
+
+<div class="trackInfoDivRow" id="currentWeatherDisplay">
+
+  <div class="" id="currentWeather">
+
+    <p>Current Weather</p>
+    <p>{{ weather.feelslike_f }}°f / {{ weather.feelslike_c }}°c</p>
+    <p>{{ weather.weather }}</p>
+    <img ng-src="{{weather.icon_url}}" alt="">
+
+  </div>
+
+</div>
+
+<div class="" id="weatherForecastDiv">
+
+
+  <div class="forecastCell" ng-repeat="day in tenDayForecast">
+
+    <div class="forecastCellHeader">
+
+      <h4>{{ day.date.weekday }} {{ day.date.monthname }}, {{ day.date.day }}</h4>
+
+    </div>
+
+    <div class="forecastCellInfo">
+
+      <h2>{{ day.conditions }}</h2>
+
+      <img src="{{ day.icon_url }}" alt="">
+
+      <h2>High {{ day.high.fahrenheit }}°f / {{ day.high.celsius }}°c</h2>
+
+      <h2>Low {{ day.low.fahrenheit }}°f / {{ day.low.celsius }}°c</h2>
+
+    </div>
+
+  </div>
+
+</div>

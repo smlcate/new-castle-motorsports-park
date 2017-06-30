@@ -1,4 +1,20 @@
+
+
+<div id="ownersPageNav">
+
+  <a ng-click="goToPage('ownersPage')">Top</a>
+  <a ng-click="goToPage('pricesPar')">Fees</a>
+  <a ng-click="goToPage('practiceRulesDiv')">Practice Rules</a>
+  <a ng-click="goToPage('pitSpotPar')">Pit Spaces</a>
+  <a ng-click="goToPage('seriesFormatInfoDiv')">Series Info</a>
+  <a ng-click="goToPage('classInfoPar')">Class Info</a>
+  <a ng-click="goToPage('rulesDiv')">Series Rules</a>
+
+
+</div>
+
 <div section="parallax" id="ownersPage">
+
 
   <div class="parallax-inner" id="ownersPageInfo">
 
@@ -171,5 +187,239 @@
     </p>
 
   </div>
+
+
+</div>
+
+<div class="contentDiv" id="seriesFormatInfoDiv">
+
+  <h2>Kart Racers of America Series Raceday Format</h2>
+
+  <h4>Practice - 8-10 Minutes Per Class, No Kid Karts (Two Rounds)</h4>
+
+  <h4>Qualifying - 1 Round, 6 Minutes Per Class, No Kid Karts</h4>
+
+  <a href="../pdfs/ScheduleRotation1-16.pdf">Class Rotation PDF</a>
+
+  <a href="../pdfs/2017KRAmembership.pdf">2017 KRA Membership Form PDF</a>
+
+
+  <!-- <a ng-click="goToPage('rulesDiv')">KRA Series Rules 202</a> -->
+
+  <a ng-click="goToPage('rulesDiv')">KRA Series Rules</a>
+
+  <h4><b>KRA members are eligible for season end points awards</b></h4>
+  <h4><b>  Non-Members are eligible for raceday awards but are not eligible for year end points awards.</b></h4>
+  <h4><b>If you plan to mail your membership form please mail to the addres below.</b></h4>
+
+  <ul>
+    <li>Kart Racers of America</li>
+    <li>2650 West Main Street</li>
+    <li>Greenfield, IN 46140</li>
+  </ul>
+
+  <h3><b>The track does NOT have a mailbox</b></h3>
+
+  <h3>Features</h3>
+
+  <ul>
+    <li>12 lap features.</li>
+    <li>Kid Karts will run at the lunch break, please see the KRA Raceday Schedule.</li>
+    <li><b>Gates/Registration/Racer's Grill opens at 7:00am.</b></li>
+    <li><b>Practice Starts at 8:00am.</b></li>
+    <li>We will be running a number of track layouts at KRA events, lap numbers may change depending on the length of track, time will be used in the event of a red flag to remain on a time certain schedule.</li>
+  </ul>
+
+</div>
+
+<div section="parallax" id="classInfoPar">
+
+  <div class="parallax-inner" id="classInfoParInfo">
+
+    <h1>KRA Series Class List</h1>
+
+    <h4>*Spec tires are <b>Mandatory</b> for all classes whether the driver is running for points or not.</h4>
+
+    <div id="classInfoDivContainer">
+
+      <div class="classInfoDiv" ng-repeat="info in classInfo">
+
+        <h3><b>{{info.name}}</b></h3>
+        <h4><b>Weight: </b>{{info.weight}}</h4>
+        <h4><b>Tires: </b>{{info.tires}}</h4>
+        <p>{{info.notes}}</p>
+
+      </div>
+
+    </div>
+
+
+    <h3>KRA LO206 Class</h3>
+    <ul>
+      <li>LO206 Engine Rules: Must run RLV 5507 Exhaust Header with 4104 Silencer. All engines must run Factory Briggs rules only. No disc clutches, shoe type only.</li>
+      <li>NCMP track 100 octane LO206 race gas only, must pass tech</li>
+      <li>Shoe Type Clutch Only, No Disc Clutches</li>
+    </ul>
+
+    <h3>KRA Briggs LO206 Senior (This is the NON-CIK class)</h3>
+    <ul>
+      <li>Seat - Laydown and Sprint Style seats allowed</li>
+      <li>Bodywork - Bodywork can be European CIK bodywork or traditional 4 cycle bodywork</li>
+      <li>Front Wheel Width - 6 1/4" Wide Outside to Outside Max. Rear Wheel Width - 9" Rear Outside to Outside Max</li>
+    </ul>
+
+    <h3>KRA Briggs LO206 CIK and Masters Class Rules</h3>
+    <ul>
+      <li>Seat - Must use sprint style kart seat</li>
+      <li>Bodywork - Must use any CIK approved European style bodywork. Rear plastic bumper is optional</li>
+      <li>Front Wheel Width - 5 1/2" x 5" Max Overall Width, Outside to Outside.  Rear Wheel Width - 8 3/8" x 5" Max Overall Width, Outside to Outside</li>
+    </ul>
+
+    <h3>KRA TaG Class Weight Structure</h3>
+    <ul>
+      <li>
+        <h4>TaG Super Lite</h4>
+        <ul>
+          <li>PRD, Easy Kart - 325 lbs.</li>
+          <li>Leopard, Rotax, X30 - 335 lbs.</li>
+          <li>All Other Engines - 345 lbs.</li>
+        </ul>
+      </li>
+      <li>
+        <h4>TaG Senior Class</h4>
+        <ul>
+          <li>PRD, Easy Kart - 350 lbs.</li>
+          <li>Leopard, Rotax, X30 - 360 lbs.</li>
+          <li>All Other Engines - 370 lbs.</li>
+        </ul>
+      </li>
+      <li>
+        <h4>TaG Heavy</h4>
+        <ul>
+          <li>PRD, Easy Kart Leopard - 395 lbs.</li>
+          <li>X30 - 405 lbs.</li>
+          <li>All Other Engines - 415 lbs.</li>
+        </ul>
+      </li>
+      <li>Add 20 lbs to the minimum weight if you are running front brakes in any single speed class (does not include shifter class, no additional weight needed)</li>
+      <li>The Motori 7 engine is NOT allowed in any KRA TaG Class.</li>
+      <li>
+        <h4>Unlimited Class Weight Structure</h4>
+        <ul>
+          <li>Any Bridgestone Tire, No minimum weight. Any single speed purpose built kart engine gas or alcohol (The two speed Rotax DD2 is allowed) is permitted. Carburetor or fuel injection is allowed. Any motor that is deemed possible to produce 40hp or more will be required to use front and rear brakes.</li>
+          <li>Twin or single engine formulas are permitted. In this day of spec classes in all forms of motorsports this class offers innovation and creativity to the racers. This class is truly UNLIMITED, have fun!</li>
+        </ul>
+      </li>
+    </ul>
+
+  </div>
+
+</div>
+<div class="contentDiv" id="rulesDiv">
+
+  <h1 id="rulesHeader">KRA Rules</h1>
+
+  <h3><b>Basic KRA Rules</b></h3>
+  <ul>
+    <li>*All Senior 2 Cycle Classes Must Run 450x5 Fronts and 710x5 Rear Tires. (Spec Tire Compounds for Each Class Here)</li>
+    <li>*All Competitors Must Run the Spec Tire for their class whether they are running for points or not. (Spec Tire Compounds for Each Class Here)</li>
+    <li>*All 2 Cycle Classes Must Run CIK Approved Front Nose - No G-Man Style Noses, complete CIK Bodywork is encouraged but not mandatory, flat side panels legal.</li>
+    <li>*Make sure you read any supplemental rules listed for your class on the Classes page.</li>
+    <li>*Airboxes MANDATORY in all Two Cycle and Shifter Classes.</li>
+    <li>*All Briggs/Clone Classes Must run RLV Mufflers.</li>
+    <li>*All karts must have numbers on all four corners.</li>
+    <li>*In the event of rain, KRA will race, all classes (except Kid Kart) must run Bridgestone Rain Tires. Kid Kart is open rain tires.</li>
+    <li>*All Lead Weights must be cotter keyed or double nutted and all brakes and steering bolts/nuts must be cotter keyed.</li>
+    <li>*Add 20 lbs to the minimum weight if you are running front brakes in any single speed class (does not include shifter class, no additional weight needed)</li>
+    <li>*Disqualifications can not be dropped, no shows/non-entries can be dropped.</li>
+    <li>*Snell 2010 or Better Helmet, Jacket or Suit/Neckcollar/Gloves are mandatory at all times.</li>
+    <li>*All MINORS must have MINOR RELEASE on file and signed by Parent/Legal Guardian before they can be allowed to practice or race. NO EXCEPTIONS. (Available at Track)</li>
+    <li>*Engine Tech and chassis tech (except those noted above) for all classes will use the 2012 WKA Technical Manual - email us for clarification.</li>
+    <li>*KRA will not use onboard video or photos to decide any protests.</li>
+    <li>*Video cameras are allowed, video cameras must be mounted to the chassis or the bodywork using bolts and securely in place. Cameras can not be attached to the driver or the helmet. In the event of a flip or contact the camera could cause injury.</li>
+  </ul>
+  <h3><b>Kart Racers of America Kid Kart Rules</b></h3>
+  <ul>
+    <li>If you need clarification on a rule please contact us.</li>
+    <li>*Kid kart drivers must use an SFI Approved Chest Plate at all times while on track!</li>
+    <li>*Gas and Oil Premix Only, must use NCMP Race Fuel</li>
+    <li>*No Restrictor Plate</li>
+    <li>*150 lbs minimum kart and driver</li>
+    <li>*Max tire width 550x5, Open Compound, max rear tire circumference 33 3/4"</li>
+    <li>*KID KART RULES WILL BE STRICTLY ENFORCED! ANY KARTS OUT OF SPECIFICATIONS WILL BE DISQUALIFIED. ANY PARENTS DISPLAYING UNSPORTSMAN LIKE CONDUCT OR FOUL LANGUAGE WILL BE ASKED TO LEAVE AND THEIR ENTRY FORFEITED.</li>
+    <li>*The kid kart class is for the enjoyment of the children, we ask that all parents please set a good example for all the kids in the class.</li>
+  </ul>
+  <h3><b>Kid Kart Comer C50-C51 Engine Tech</b></h3>
+  <ul>
+    <li>*Tech Items may be subject to comparison to known stock parts.</li>
+    <li>*Carb - Dellorto SHA 14-12L, .475 No Go Venturi, Jet Sizes Allowed #54 thru #58</li>
+    <li>*Air Filter is non-tech.</li>
+    <li>*Intake manifold may not be modified.</li>
+    <li>*Intake Gasket must be properly installed. Only one gasket allowed (you are allowed to trim intake gasket to match intake port opening).</li>
+    <li>*Cylinder - Head and ports must be stock. NO porting, polishing or metal removal from dome or squish area. Spark plug hole repair allowed using full thread heli coil or thread insert, it must be full length as intended by the manufacturer.</li>
+    <li>*Spark Plug - OEM reach spark plugs only.</li>
+    <li>*CC Rule - 7.0cc, checked at TDC without head CC insert.</li>
+    <li>*All bearings non-tech.</li>
+    <li>*Seals - non-tech, must be installed as OEM.</li>
+    <li>*Crank Pin and Wrist Pin must be OEM.</li>
+    <li>*Piston - Skirt length 1.210 minimum as measured from the bottom of bottom ring land to bottom of skirt on intake side of the piston, the top of the piston must remain stock.</li>
+    <li>*Rings - Must run both rings, rings can not fall through cylinder.</li>
+    <li>*Exhaust - New or old style mufflers allowed, must be unaltered, one exhaust gasket, no cut gaskets, exhaust system must be tight.</li>
+    <li>*Clutch - Must run comer clutch shoes but non tech on size.</li>
+    <li>*Clutch Springs - Non Tech</li>
+    <li>*Clutch Drum - 10 tooth 219 only</li>
+    <li>*Rear Axle Sprocket - 89 tooth 219 only</li>
+    <li>*Coil - Blue or Black Coil -  Must be unaltered</li>
+    <li>*Coil Bolts - Must be unaltered</li>
+    <li>*Flywheel - Must be unaltered. Flywheel key slot must reamin in stock location, no cut or broken fins allowed.</li>
+    <li>*Taping of Flywheel Shroud is allowed.</li>
+    <li>*Flywheel key must be OEM and installed properly, flywheel key slot must remain in stock location.</li>
+  </ul>
+  <h3><b>Parilla Leopard and Yamaha KT100 Supplemental Engine Rules</b></h3>
+  <ul>
+    <li>KRA will be implementing new engine tech rules for the Parilla Leopard and Yamaha KT100 in 2013. These new rules will address an ongoing issue with cylinders that have been modified in the port area. Even though this rule may make it necessary for a handful of racers to purchase new cylinders, it will most definately prevent hundreds from ever needing to have modifications done that will cost each racer hundreds per cylinder. This rule change will not impact the majority of racers.</li>
+    <li>KRA will not be the only series putting "blowdown" rules into effect, as a number of regional and national series are also adopting similar rules. These rules are in place to eliminate any Leopard or Yamaha cylinder from having an advantage over another and puts the emphasis on driving, experience and chassis tuning. KRA may also apply this rule to other engine types in the future if deemed necessary.</li>
+    <li><b>Parilla Leopard</b> - Transfers checked with LAD tool - Minimum blowdown .395", Maximum .405".</li>
+    <li>Exhaust checked with LAD tool - Minimum blowdown .235", Maximum .265" (boost port checked with controlling edge of ring).</li>
+    <li>To check Transfer Blowdown - Subtract highest exhaust port height from highest transfer port using LAD tool.</li>
+    <li>To check Boost Blowdown - (From TDC) Rotate piston past boost port opening .100", rotate back up until controlling edge of ring closes boost port.</li>
+    <li>Subtract highest boost port height from highest exhaust port height.</li>
+    <li><b>*Parilla Leopard must run OEM IAME stock reeds only</b></li>
+    <li><b>Yamaha KT100</b> - Minimum blowdown .380", maximum .410" as measured with LAD tool.</li>
+
+  </ul>
+  <h3><b>Spec TaG Rules</b></h3>
+  <ul>
+    <li>*Two Additional Seat Struts (2 on frame, 2 going to bearing hangers, 4 total) will be permitted to avoid seat breakage.</li>
+    <li>*385 lbs Minimum with Leopard Engine, 365 lbs with PRD Engine</li>
+    <li>*11-77 gear Maximum</li>
+    <li>*OEM Airboxes only, Inner and Outer Air Filter allowed.</li>
+    <li>*Solid Pipe or Flex Pipe is allowed, Pipe Length is non-tech item.</li>
+    <li>*Only Douglas Spun Aluminum Wheels as equipped allowed, DSM front wheel only.</li>
+    <li>*OEM Long Rear Hubs only.</li>
+    <li>*40mm B Stiffness Axle only.</li>
+    <li>*Adjustable Top Pills allowed.</li>
+    <li>*Motor and Carb must be Box Stock only! Any attempt to do otherwise will result in disqualification and loss of ALL points up to that disqualification.</li>
+    <li>*Any Blendzall Oil is permitted</li>
+    <li>*NCMP race gas only</li>
+    <li>*Any Spark Plug is allowed</li>
+    <li>*American Brake System only - MCP or Enginetics</li>
+    <li>*Aftermarket throttle linkage is allowed in Spec TaG and TaG USA</li>
+    <li>*Radiator Placement must remain stock as supplied, Aftermarket Radiator is allowed</li>
+    <li>*For every 20 pounds over a driver/kart combination is, you can add an additional tooth. (e.g. You weigh 405 lbs going across the scales after Spec TaG, you can run an 11-78 gear in Spec Tag instead of 11-77. If you weigh in at 404 lbs, you would be DQ'ed if you had on an 11-78 in Spec TaG).</li>
+  </ul>
+  <h3><b>Transponders</b></h3>
+  <ul>
+    <li>*Transponders will be used in all classes for qualifying and racing.</li>
+    <li>*Transponders are available for rent for $16.05.</li>
+    <li>*Transponders and Brackets are available for purchase at NCMP.</li>
+    <li>*If you have your own MyLaps/AMB transponder you are welcome to use it at all KRA Series events, we will also have transponders for sale at all events.</li>
+    <li>*It is the DRIVER'S responsibility, not KRA's that the transponder is installed correctly and functioning properly on the kart. Failure to do so will result in not being scored during qualifying or races.</li>
+    <li>*Transponders and Holders can also be bought online through Comet Kart Sales.</li>
+
+
+
+
+  </ul>
 
 </div>
