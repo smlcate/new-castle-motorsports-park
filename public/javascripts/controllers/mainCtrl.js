@@ -1,11 +1,7 @@
 app.controller('mainCtrl', ['$scope', '$http', function($scope, $http) {
 
-  // $http.get('/getEvents')
-  // .then(function(res) {
-  //   console.log(res.data);
-  // })
-
   var monthNames =  ['January','February','March','April','May','June','July','August','September','October','November','December'];
+
   var monthDays = [31,28,31,30,31,30,31,31,30,31,30,31];
 
   var daysOfWeek = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
@@ -22,8 +18,6 @@ app.controller('mainCtrl', ['$scope', '$http', function($scope, $http) {
     year: date.getFullYear()
   }
 
-  // console.log($scope.date)
-
   $scope.selectedMonth = $scope.date.month;
   $scope.selectedYear = $scope.date.year;
   $scope.selectedDate = $scope.date.date;
@@ -37,6 +31,10 @@ app.controller('mainCtrl', ['$scope', '$http', function($scope, $http) {
   $scope.eventsAfterToday = [];
 
   $scope.selectedObject;
+
+  $scope.selectedClass;
+
+  $scope.pointsList;
 
   function fillClassInfo() {
 
@@ -162,62 +160,209 @@ app.controller('mainCtrl', ['$scope', '$http', function($scope, $http) {
 
   fillClassInfo();
 
+  function getPoints() {
 
-  // $scope.goToFees = function() {
-  //
-  //   document.getElementById("pricesPar").scrollIntoView()
-  //
-  // }
-  // $scope.goToPracticeRules = function() {
-  //
-  //   document.getElementById("pacticeRulesPar").scrollIntoView()
-  //
-  // }
-  // $scope.goTopPitSpaces = function() {
-  //
-  //   document.getElementById("pitSpotPar").scrollIntoView()
-  //
-  // }
-  // $scope.goToSeriesInfo = function() {
-  //
-  //   document.getElementById("seriesFormatInfoDiv").scrollIntoView()
-  //
-  // }
-  // $scope.goToClassInfo = function() {
-  //
-  //   document.getElementById("classInfoPar").scrollIntoView()
-  //
-  // }
+    $http.get('getPoints')
+    .then(function(data) {
+      console.log(data)
+      makePointsList(data.data[0].pointsData);
+      $scope.selectedClass = $scope.pointsList[0];
+    })
+    .catch(function(err) {
+      console.log(err);
+    })
+
+  }
+
+  getPoints();
+
+  function makePointsList(data) {
+
+    // console.log(data);
+
+    var splitBreaks = data.split(/\r?\n/).map(function(r) {
+      return r.split('","');
+    },[]);;
+
+    var classes = [];
+    var c = []
+    for (var i = 0; i < splitBreaks.length; i++) {
+
+      if (splitBreaks[i].length === 2) {
+        c.push(splitBreaks[i][0])
+        classes.push(c);
+        c = [];
+        c.push(splitBreaks[i][1]);
+      } else {
+        c.push(splitBreaks[i]);
+      }
+
+    }
+
+    // console.log(classes.length);
+
+    var pointsData = [];
+
+    for (var i = 0; i < classes.length; i++) {
+
+      // console.log(i)
+      // console.log( 'i' , i)
+
+      var c = classes[i];
+
+      var classData = {
+        name: '',
+        drivers: [],
+        dates:[],
+        points: []
+      };
+
+      var counter = 0;
+      var finished = false;
+
+      for (var j = 0; j < c.length; j++) {
+        // console.log('j', j)
+
+
+        var d = c[j];
+
+        // console.log(d)
+        if (c.length === 3 ) {
+          var driver = {
+            name: 'No Data'
+          }
+          classData.drivers.push(driver);
+        }
+
+        if (j === 0) {
+          if (i === 0) {
+            d = d[0].slice(2,-29)
+            // console.log('here');
+          } else {
+            d = d.slice(0,-29);
+          }
+          // console.log(d);
+          classData.name = d;
+          // console.log(d);
+        } else if (j === 2) {
+
+          d = d[0].split(",,");
+
+          classData.dates = d;
+
+          for (var l = 0; l < d.length; l++) {
+            if (d[l][0] === ',') {
+              classData.dates[l] = d[l].slice(1);
+              l = d.length;
+            }
+          }
+
+
+          // classData.dates[0] = JSON.stringify(classData.dates[0]).slice(1)
+
+        } else if(j > 3) {
+
+          var driver = {
+            name: '',
+            positions: [],
+            points: [],
+            totalPoints: 0
+          }
+
+          d = d[0].split(',');
+          console.log(d)
+
+          if (d[0] == 0) {
+            finished = true;
+          }
+
+          if (d[0] !== "" && d[0] !== " " && finished === false) {
+
+
+            if (counter + 35 >= classes[i].length) {
+
+              var point = {
+                pos: d[0],
+                score: d[1]
+              }
+              
+              classData.points.push(point);
+
+            } else if(d[0] !== "Position = Point Value") {
+
+              driver.name = d[0];
+
+              pp = true;
+
+              for (var k = 1; k < d.length; k++) {
+                if (pp === true) {
+                  driver.positions.push(d[k]);
+                  pp = false;
+                } else if (pp === false) {
+                  driver.points.push(d[k]);
+                  pp = true;
+                }
+              }
+              driver.totalPoints = driver.positions[14];
+              driver.positions[14] = '';
+              classData.drivers.push(driver);
+
+            }
+
+          }
+
+
+          // console.log(driver);
+
+          counter++;
+
+        }
+        // console.log(d)
+        //
+        // console.log(classData);
+
+
+
+        // console.log(classData);
+
+        // console.log(d)
+
+      }
+
+      // classData.drivers.slice(0,-1);
+
+      pointsData.push(classData);
+
+
+    }
+
+    // console.log(pointsData);
+
+    $scope.pointsList = pointsData;
+
+    console.log($scope.pointsList)
+
+  }
+
+  $scope.selectClass = function(c) {
+    $scope.selectedClass = c;
+    console.log(c)
+  }
+
+
 
   $scope.selectDay = function(day) {
-    // console.log(day)
+
     var obj = day;
-
-
 
     obj.day = daysOfWeek[(day.day)-1];
     obj.month = monthNames[(day.month)-1];
 
     $scope.selectedObject = obj;
 
-    // console.log(obj)
-    // if (obj.events.length >= 2) {
-    //
-    //   $('#selectedDayDiv').css('display','flex');
-    //
-    // } else {
-    //
-    //   $('#selectedDayDiv').css('display','none');
-    //
-    // }
-
-
-    // console.log($scope.selectedObject)
   }
 
   $scope.selectEvent = function(event) {
-
-    console.log(event)
 
     var y = event.date.slice(0,-20);
     var m = Number(event.date.slice(5,-17));
@@ -250,7 +395,6 @@ app.controller('mainCtrl', ['$scope', '$http', function($scope, $http) {
 
     var ne = en1 + es;
 
-    console.log(event.end_time)
 
     $scope.eventInfo.input = {
       name: event.name,
@@ -262,20 +406,9 @@ app.controller('mainCtrl', ['$scope', '$http', function($scope, $http) {
 
     }
 
-    // console.log('0' + JSON.stringify(Number(event.start_time.slice(0,-6),-1)-5 + event.start_time.slice(2)))
-    console.log(event.start_time)
-
-
-
-    console.log($scope.eventInfo.input)
-
   }
 
   function buildCalendar() {
-
-    // console.log('hit 2')
-
-    // console.log($scope.events);
 
     var curMonthDays = monthDays[$scope.selectedMonth];
     var prevMonthDays;
@@ -356,36 +489,11 @@ app.controller('mainCtrl', ['$scope', '$http', function($scope, $http) {
         )
       }
 
-      // cellBody.day = daysOfWeek[dayOfWeek-1];
-
       dayOfWeek ++;
-
-      // console.log(cellBody.events, 'hit 1')
-
-      // $http.post('/getEventByDate', {date: thisDate})
-      // .then(function(res) {
-      //   if (res.data[0] != 'undefined') {
-      //     cellBody.events = res.data;
-      //     console.log(cellBody)
-      //     console.log(i)
-      //     console.log(res.data);
-      //
-      //     cellBody.events = res.data[0];
-      //     console.log(cellBody.events, 'hit 2');
-      //
-      //   }
-      //
-      // })
-      // .catch(function(err) {
-      //   console.log(err);
-      // })
-
 
 
       if (calendarDay == prevMonthDays && i < 6) {
 
-
-        // console.log(cellBody)
         month_events.push(cellBody);
 
         activeMonth = true;
@@ -394,17 +502,9 @@ app.controller('mainCtrl', ['$scope', '$http', function($scope, $http) {
 
       } else if(calendarDay === curMonthDays && i > 6) {
 
-        // cellBody = {
-        //   date: calendarDay,
-        //   day: dayOfWeek,
-        //   curMonth: true
-        // }
-
         cellBody.date = calendarDay;
         cellBody.day = dayOfWeek;
         cellBody.curMonth = true;
-
-
 
         month_events.push(cellBody)
 
@@ -415,30 +515,15 @@ app.controller('mainCtrl', ['$scope', '$http', function($scope, $http) {
 
       } else if(calendarDay < curMonthDays && i > 6 && activeMonth === false) {
 
-
-
-        // cellBody = {
-        //   date: calendarDay,
-        //   day: dayOfWeek,
-        //   curMonth: false
-        // }
         cellBody.date = calendarDay;
         cellBody.day = dayOfWeek;
         cellBody.curMonth = false;
 
         calendarDay ++;
 
-
-
         month_events.push(cellBody);
 
       } else {
-
-        // cellBody = {
-        //   date: calendarDay,
-        //   curMonth: activeMonth,
-        //   day: dayOfWeek
-        // }
 
         cellBody.date = calendarDay;
         cellBody.day = dayOfWeek;
@@ -450,24 +535,9 @@ app.controller('mainCtrl', ['$scope', '$http', function($scope, $http) {
         month_events.push(cellBody);
       }
 
-      // console.log(cellBody)
-
     }
-
-    function getCurEvents() {
-      var curDayEvent = {};
-      var next3Events = [];
-      // var today = new Date();
-      // console.log(today);
-
-
-    }
-
-    getCurEvents();
 
     $scope.month_events = month_events;
-
-    // console.log($scope.month_events);
 
     for (var i = 0; i < $scope.events.length; i++) {
 
@@ -482,10 +552,7 @@ app.controller('mainCtrl', ['$scope', '$http', function($scope, $http) {
         console.log(dateNumber);
       }
 
-      // console.log(date);
-
       if ($scope.selectedMonth === date - 1) {
-
 
         month_events[dateNumber -1 + (monthStartDay)].events.push($scope.events[i]);
         month_events[dateNumber -1 + (monthStartDay)].events[0] = null;
@@ -514,20 +581,18 @@ app.controller('mainCtrl', ['$scope', '$http', function($scope, $http) {
       var m = Number(JSON.stringify(event.startDate).slice(6,-18));
       if (m[0]==='0') {
         m = m.slice(1)
-        // consolevent.log(d1);
-        // consolevent.log(JSON.stringify(event.endDate).slice(10,-15))
+
         days = Number((monthDays[m-1] - d1) + d2);
-        // if (days[0]==='0') {
-        //   days.slice(1)
-        // }
-        // consolevent.log(days);
+
       } else {
+
         days = Number((monthDays[m-1] - d1) + d2);
-        // consolevent.log(days)
+
       }
     } else {
+
       days = d2-d1;
-      // consolevent.log(days);
+
     }
 
     event.length = days;
@@ -535,14 +600,12 @@ app.controller('mainCtrl', ['$scope', '$http', function($scope, $http) {
   }
 
   function getEvents() {
-    // console.log('hit 1');
+
     $http.get('/getEvents')
     .then(function(res) {
       $scope.events = res.data;
 
       console.log(res.data)
-
-      // console.log(new Date())
 
       var today = new Date();
 
@@ -551,7 +614,6 @@ app.controller('mainCtrl', ['$scope', '$http', function($scope, $http) {
         day: today.getDate(),
         month: today.getMonth()+1
       }
-      console.log(current);
 
       var eventful = false;
 
@@ -563,9 +625,6 @@ app.controller('mainCtrl', ['$scope', '$http', function($scope, $http) {
         var y = Number(date.slice(0,-6));
         var d = Number(date.slice(8))
         var m = Number(date.slice(5,-3))
-
-        console.log(y, d, m);
-
 
         var e = res.data[i]
 
@@ -605,22 +664,25 @@ app.controller('mainCtrl', ['$scope', '$http', function($scope, $http) {
 
           eventful = true;
 
-
-
           $scope.currentDaysEvents.push(e);
+
         }
 
         if (y == current.year && m >= current.month) {
-          console.log('here 1')
+
           if (m > current.month) {
-            console.log('here 2')
+
             $scope.eventsAfterToday.push(e);
+
           } else if(d >= current.day) {
-            console.log('here 3')
+
             $scope.eventsAfterToday.push(e);
+
           }
         } else if (y > current.year) {
+
           $scope.eventsAfterToday.push(e);
+
         }
 
       }
@@ -645,21 +707,15 @@ app.controller('mainCtrl', ['$scope', '$http', function($scope, $http) {
         }
       }
 
-      console.log($scope.eventsAfterToday)
-
-
       buildCalendar();
+
     })
   }
 
   getEvents();
 
-  function getEventsFromTodayOn() {
-
-  }
 
   $scope.goToPage = function(s) {
-    console.log(s)
 
     document.getElementById(s).scrollIntoView()
 
@@ -680,7 +736,9 @@ app.controller('mainCtrl', ['$scope', '$http', function($scope, $http) {
     }
 
     $scope.selectedMonth_text = monthNames[$scope.selectedMonth];
+
     getEvents();
+
   }
 
   $scope.prevMonth = function() {
@@ -698,6 +756,7 @@ app.controller('mainCtrl', ['$scope', '$http', function($scope, $http) {
 
     $scope.selectedMonth_text = monthNames[$scope.selectedMonth];
     getEvents();
+
   }
 
   $scope.eventInfo = {
@@ -711,19 +770,18 @@ app.controller('mainCtrl', ['$scope', '$http', function($scope, $http) {
 
 
   $scope.toggleSeries = function() {
-    console.log($scope.eventInfo)
 
     if($scope.eventInfo.series === false) {
+
       $('#addSeriesEventBtn').css('display','none');
       $('#seriesSelectDiv').css('display','flex');
-      // $('#eventDescriptionInput').css('width','100%');
 
     } else {
+
       $('#addSeriesEventBtn').css('display','flex');
       $('#seriesSelectDiv').css('display','none');
       $scope.eventInfo.selectedSeriesInfo = null;
 
-      // $('#eventDescriptionInput').css('width','70%');
     }
 
 
@@ -737,8 +795,6 @@ app.controller('mainCtrl', ['$scope', '$http', function($scope, $http) {
 
   $scope.toggleDays = function() {
 
-    console.log($scope.eventInfo)
-
     if($scope.eventInfo.singleDay === true) {
       $('#endDateSpan').css('display','none');
     } else {
@@ -747,7 +803,6 @@ app.controller('mainCtrl', ['$scope', '$http', function($scope, $http) {
   }
 
   $scope.addSeriesEvent = function(e) {
-
 
     var event = {
       startDate: e.startDate,
@@ -764,28 +819,8 @@ app.controller('mainCtrl', ['$scope', '$http', function($scope, $http) {
 
     event.displayDate = JSON.stringify(event.startDate).slice(6,-15)
     event.displayEndDate= JSON.stringify(event.endDate).slice(6,-15)
-    // var d = e.startDate
-
-    // event.id = $scope.eventInfo.events.length;
-
-    console.log(JSON.stringify($('#eventStartDateInput').val()))
-
-    // e.displayDate = JSON.stringify(e.startDate).slice(6,-15)
-    // e.displayEndDate = JSON.stringify(e.endDate).slice(6,-15)
-
-    // e.displayDate = JSON.stringify($('#eventStartDateInput').val())
-    // e.displayEndDate = JSON.stringify($('#eventEndDateInput').val())
-    //
-    // e.startDate = d;
-    // e.startDate = e.startDate.slice(5,-14);
-
-    // e.id = $scope.eventInfo.events.length;
-
-
 
     daysBetweenDates(event);
-
-    // var e = event;
 
     $scope.eventInfo.events.push(event);
 
@@ -793,23 +828,228 @@ app.controller('mainCtrl', ['$scope', '$http', function($scope, $http) {
 
   }
 
-  $scope.selectSeries = function(series_name,series) {
+  // function parseExcelData(file) {
+  //
+  //   console.log(file);
+  //
+  // }
 
-    console.log(series);
+  $scope.pointsLists = [];
+
+
+  $scope.updatePoints = function() {
+
+    // if (window.File && window.FileReader && window.FileList && window.Blob) {
+    //   alert("File API supported.!");
+    // } else {
+    //   alert('The File APIs are not fully supported in this browser.');
+    // }
+
+    var list = [];
+
+    var files = document.getElementById('newPointsListInput').files;
+
+    var x = 0;
+
+    // console.log(files);
+
+    function read(callback) {
+
+      for (var i = 0; i < files.length; i++) {
+
+        var reader = new FileReader();
+        reader.readAsText(files[i], "UTF-8");
+        reader.onload = loaded;
+
+        function loaded(evt) {
+          console.log(i)
+          var fs = evt.target.result
+          console.log(fs)
+          list.push(fs);
+        }
+
+      }
+
+      setTimeout(callback, 2000)
+
+    }
+
+    read(function post() {
+
+      var stringified = JSON.stringify(list);
+
+      $http.post('updatePoints', stringified)
+      .then(function(res){
+        console.log(res.data);
+      })
+
+    })
+
+    // setTimeout(post(),3000);
+
+
+
+    // for(i = 0; i < files.length; i++) {
+    //
+    //
+    //   var reader = new FileReader();
+    //   reader.readAsText(files[i], "UTF-8");
+    //   reader.onload = loaded;
+    //
+    //   function loaded(evt) {
+    //     fs = JSON.stringify(evt.target.result);
+    //     list.push(fs);
+    //     // console.log(i);
+    //     if (x == files.length) {
+    //       $http.post('updatePoints', list)
+    //       .then(function(res) {
+    //         console.log(res.data)
+    //       })
+    //     }
+    //     x++;
+    //   }
+    //
+    // }
+
+    // $http.post('updatePoints', files)
+
+    // function getAsText(readFile) {
+    //
+    // }
+
+    // function createList() {
+    //
+    //   for (var i = 0; i < files.length; i++) {
+    //
+    //     var f = files[i]
+    //
+    //     if (f) {
+    //       //  getAsText(file);
+    //       // alert("Name: " + f.name + "\n" + "Last Modified Date :" + f.lastModifiedDate);
+    //       var reader = new FileReader();
+    //       reader.readAsText(f, "UTF-8");
+    //       reader.onload = loaded;
+    //
+    //       function loaded(evt) {
+    //         // alert("File Loaded Successfully");
+    //         var fileString = evt.target.result;
+    //
+    //         list.push(fileString)
+    //
+    //         // $("#op").text(fileString);
+    //         // var splitFS = fileString.split(/\r?\n/);
+    //         //
+    //         // var parsedFS = [];
+    //         //
+    //         // for (var k = 0; k < splitFS.length; k++) {
+    //         //   var row = splitFS[k].split(',');
+    //         //   var newRow = [];
+    //         //   for (var j = 0; j < row.length; j++) {
+    //         //     if(row[j] !== "") {
+    //         //       newRow.push(row[j]);
+    //         //     }
+    //         //   }
+    //         //   if (newRow[0] !== "" && newRow[0]) {
+    //         //     parsedFS.push(newRow);
+    //         //   }
+    //         // }
+    //         //
+    //         // list.push(parsedFS);
+    //         // // $scope.pointsLists = list;
+    //         // console.log(list)
+    //         //
+    //         // console.log(i, files.length)
+    //         //
+    //         // if (i === files.length) {
+    //         //
+    //         //   console.log('hit')
+    //         //
+    //         //   var listString = JSON.stringify(list);
+    //         //
+    //         //   $http.post('updatePoints', listString)
+    //         //   .then(function(res) {
+    //         //     console.log(res.data)
+    //         //   })
+    //         //
+    //         // }
+    //
+    //
+    //
+    //       }
+    //
+    //     }
+    //   }
+    //
+    //   if (list != null) {
+    //     var listString = JSON.stringify(list);
+    //
+    //     $http.post('updatePoints', listString)
+    //     .then(function(res) {
+    //       console.log(res.data)
+    //     })
+    //   }
+    //
+    // }
+    //
+    // createList();
+
+
+    // $scope.pointsLists = list;
+    // console.log(list)
+
+
+    // console.log($('#newPointsListInput')[0].files)
+    //
+    // var files = $('#newPointsListInput')[0].files
+    //
+    // var xhttp = new XMLHttpRequest();
+    // xhttp.onreadystatechange = function() {
+    //   console.log(this.responseText)
+    // };
+    // xhttp.open('GET', files[0].name, true);
+    // xhttp.send();
+
+    // var file = $('#newPointsListInput')[0].files[0]
+    //
+    // var reader = new FileReader();
+    // console.log(reader);
+    //
+    // reader.onload = function(e) {
+    //   var data = e.target.result;
+      // console.log(data);
+      // var cfb = XLSX.read(data, {type: 'binary'});
+      // console.log(cfb)
+
+      // var wb = XLSX.parse_xlscfb(cfb);
+      // Loop Over Each Sheet
+      // wb.SheetNames.forEach(function(sheetName) {
+        // Obtain The Current Row As CSV
+        // var sCSV = XLS.utils.make_csv(wb.Sheets[sheetName]);
+        // var oJS = XLS.utils.sheet_to_row_object_array(wb.Sheets[sheetName]);
+        //
+        // $("#my_file_output").html(sCSV);
+        // console.log(oJS)
+      // });
+    // };
+    // reader.readAsText(file);
+    //
+    // // console.log($scope.newPointsList);
+    //
+    //
+    // console.log(file);
+    //
+    //
+    // parseExcelData(file);
+  }
+
+  $scope.selectSeries = function(series_name,series) {
 
     $scope.eventInfo.selectedSeries = series_name;
     $scope.eventInfo.selectedSeriesInfo = series;
 
-    console.log($scope.eventInfo);
-
   }
 
   $scope.submitEvent = function() {
-
-    // var newEvent = {
-    //   event: $scope.eventInfo.events,
-    //   series: $scope.eventInfo.selectedSeriesInfo;
-    // }
 
     if ($scope.eventInfo.series === false) {
 
@@ -823,35 +1063,29 @@ app.controller('mainCtrl', ['$scope', '$http', function($scope, $http) {
         seriesId: $scope.eventInfo.selectedSeriesInfo.id
       };
 
-
       daysBetweenDates(event);
 
       $scope.eventInfo.events.push(event);
-
-      console.log('hit');
 
     }
 
     $http.post('submitEvent', $scope.eventInfo.events)
     .then(function(res){
-      console.log(res.data)
+
     })
 
   }
 
   $http.get('/getSeries')
   .then(function(res) {
-    $scope.eventInfo.event_groups = res.data
 
-    console.log(res.data);
+    $scope.eventInfo.event_groups = res.data
 
   })
 
 
   $http.get('https://api.wunderground.com/api/7c8eaaf84b5e5dd0/conditions/q/IN/New_Castle.json')
   .then(function(res) {
-
-    console.log(res.data);
 
     var weather = res.data.current_observation;
     var url = weather.icon_url.slice(4);
@@ -863,9 +1097,6 @@ app.controller('mainCtrl', ['$scope', '$http', function($scope, $http) {
   })
   $http.get('https://api.wunderground.com/api/7c8eaaf84b5e5dd0/forecast10day/q/IN/New_Castle.json')
   .then(function(res) {
-
-    console.log(res.data);
-
 
     $scope.tenDayForecast = res.data.forecast.simpleforecast.forecastday;
 

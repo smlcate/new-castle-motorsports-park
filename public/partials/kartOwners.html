@@ -201,6 +201,8 @@
 
   <a href="../pdfs/ScheduleRotation1-16.pdf">Class Rotation PDF</a>
 
+  <a href="../pdfs/Untitled 3.xlsx">Series Points</a>
+
   <a href="../pdfs/2017KRAmembership.pdf">2017 KRA Membership Form PDF</a>
 
 
@@ -224,7 +226,7 @@
 
   <ul>
     <li>12 lap features.</li>
-    <li>Kid Karts will run at the lunch break, please see the KRA Raceday Schedule.</li>
+    <li>Kid Karts will run at the lunch break.</li>
     <li><b>Gates/Registration/Racer's Grill opens at 7:00am.</b></li>
     <li><b>Practice Starts at 8:00am.</b></li>
     <li>We will be running a number of track layouts at KRA events, lap numbers may change depending on the length of track, time will be used in the event of a red flag to remain on a time certain schedule.</li>
@@ -311,6 +313,54 @@
         </ul>
       </li>
     </ul>
+
+  </div>
+
+</div>
+<div id="op">
+
+  <div id="pointsListSider">
+
+    <ul>
+
+      <li ng-repeat="list in pointsList" ng-click="selectClass(list)"><a>{{list.name}}</a></li>
+
+    </ul>
+
+  </div>
+
+
+  <div class="pointsCell">
+
+    <h2>{{ selectedClass.name }}</h2>
+    <div class="pointsCellTable">
+
+      <ul class="pointsCellTableHeader">
+        <li ng-repeat="date in selectedClass.dates">
+          <p>{{date}}</p>
+        </li>
+      </ul>
+      <div class="pointsCellTableRow" ng-repeat="driver in selectedClass.drivers">
+
+        <h3>{{driver.name}}</h3>
+        <div class="driverPoints">
+          <div class="driverPointsCell">
+            <h5>Pos: </h5>
+            <p ng-repeat="pos in driver.positions track by $index" > {{ pos }}</p>
+
+          </div>
+          <div class="driverPointsCell">
+            <h5>Points: </h5>
+            <p ng-repeat="point in driver.points track by $index" >{{point}}</p>
+            <h5 class="driverPointTotal">Total: {{ driver.totalPoints }}</h5>
+
+          </div>
+        </div>
+
+
+      </div>
+
+    </div>
 
   </div>
 

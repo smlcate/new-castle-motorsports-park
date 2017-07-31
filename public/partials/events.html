@@ -7,9 +7,11 @@
   <div class="" id="calendarNav">
     <div class="" id="selectedDayDiv" ng-if="selectedObject">
 
-      <div ng-repeat="object in selectedObject.events">
+      <div ng-repeat="object in selectedObject.events" >
 
         <h3>{{object.name}}</h3>
+
+        <h3>{{object.date}}</h3>
 
         {{object.description}}
 

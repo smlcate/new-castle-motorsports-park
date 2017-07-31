@@ -16,6 +16,43 @@ app.use(expressJWT({ secret: 's383838' }));
 
 var monthDays = [31,28,31,30,31,30,31,31,30,31,30,31];
 
+exports.updatePoints = function(req, res, next) {
+
+  // console.log(req.body);
+
+  var date = new Date();
+
+  knex('pointsList')
+  .insert({
+    date:date,
+    pointsData:req.body
+  })
+  .catch(function(err) {
+    console.log(err);
+  })
+
+  res.send('success')
+
+}
+
+exports.getPoints = function(req, res, next) {
+
+  knex('pointsList')
+  .select('*')
+  .then(function(data) {
+    var length = data.length;
+    // console.log('DATA FROM POINTS LIST', data);
+    var l = data;
+    // l.pointsData = JSON.parse(l.pointsData)
+    res.send(l);
+
+  })
+  .catch(function(err) {
+    console.log(err);
+  })
+
+}
+
 
 exports.getEvents = function(req, res, next) {
 

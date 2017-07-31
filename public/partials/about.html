@@ -57,7 +57,21 @@
 
   <div class="parallax-inner" id="eventInfo">
 
-    <h1 ng-repeat="event in eventsAfterToday | orderBy:'date'">{{event}}</h1>
+    <div class="futureEventDiv" ng-repeat="event in eventsAfterToday | orderBy:'date'">
+
+
+
+      <h2>{{event.name}}</h2>
+
+      <h2>{{event.date}}</h2>
+
+      <p>{{ event.description }}</p>
+
+      <h4 ng-if="event.start_time">{{ event.start_time }} - {{ event.end_time }}</h4>
+
+      <h3 ng-if="event.rentalKarts === true">Rental Karts Avaliable</h3>
+
+    </div>
 
 
 

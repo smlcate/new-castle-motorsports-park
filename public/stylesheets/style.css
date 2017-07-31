@@ -105,12 +105,131 @@ header #mainNav ul li {
   align-items: center;
 }
 
+#op {
+  /*height: 100px;*/
+  width: 90%;
+  color: black;
+  display: flex;
+  /*flex-direction: column;*/
+
+  padding: 20px;
+  /*padding-right: 40px;*/
+
+  /*flex-direction: column;*/
+  /*font-size:  200%;*/
+}
+
+#pointsListSider {
+  /*height: 100%;*/
+  width: 20%;
+  height: 100vh;
+  display: flex;
+  margin-top: 30px;
+  padding: 10px;
+  /*flex-direction: column;*/
+  /*background: blue;*/
+}
+#pointsListSider ul,li {
+  width: 100%;
+  text-align: center;
+  list-style: none;
+}
+
+#pointsListSider ul {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+#pointsListSider li {
+  margin-top: 8px;
+  width: 100%;
+}
+
+
+/*#selectClassDropdown {
+
+}*/
+
+.pointsCell {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.pointsCellTable {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /*width: 100%;*/
+}
+.pointsCellTableHeader {
+  display: flex;
+  width: 80%;
+  margin-right: 70px;
+  /*margin-left: 10px;*/
+  justify-content: flex-end;
+}
+
+.pointsCellTableHeader li {
+  list-style: none;
+  margin-left: 9px;
+  text-align: center;
+  -webkit-transform: rotate(45deg);
+   -moz-transform: rotate(45deg);
+   -o-transform: rotate(45deg);
+   -ms-transform: rotate(45deg);
+   transform: rotate(45deg);
+}
+
+.pointsCellTableRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  border-bottom: 1px solid grey;
+  width: 90%;
+  /*flex-direction: row;*/
+}
+.pointsCellTableRow h3 {
+  /*border-right: 1px solid black;*/
+  width: 300px;
+}
+.driverPoints {
+  display: flex;
+  flex-direction: column;
+  display: 100%;
+  border-left: 1px solid black;
+  /*border-bottom: 1px solid black;*/
+
+}
+.driverPointsCell {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid lightgrey;
+  /*justify-content: space-between;*/
+}
+.driverPointTotal {
+  width: 70px;
+}
+.driverPointsCell p {
+  width: 40px;
+  text-align: center;
+  margin: 3px;
+  border-right: 1px solid lightgrey;
+  font-size: 150%;
+}
+.driverPointsCell h5 {
+  width: 50px;
+  text-align: center;
+}
+
 #welcomeDiv {
 
   display: flex;
   justify-content: center;
   /*order: -1;*/
-  height: 60vh;
+  /*height: 60vh;*/
+  padding: 30px;
   width: 100vw;
   background: url('../images/maxresdefault (1).jpg') fixed 100vw;
   background-position: center;
@@ -125,6 +244,7 @@ header #mainNav ul li {
   flex-direction: column;
   /*justify-content: space-around;*/
   align-items: center;
+  color: white;
 }
 
 #welcomeInfo {
@@ -135,6 +255,7 @@ header #mainNav ul li {
   flex-direction: row;
   justify-content: space-around;
   width: 700px;
+  color: white;
 }
 
 .curWeatherDiv {
@@ -194,13 +315,32 @@ header #mainNav ul li {
 
 #eventDiv {
   display: flex;
-  justify-content: center;
+
+  /*flex-direction: row;
+  flex-wrap: wrap;*/
+  /*justify-content: center;*/
   /*order: -1;*/
-  height: 84vh;
+  /*height: 84vh;*/
   width: 100vw;
   background: url('../images/maxresdefault.jpg') fixed 100vw;
   background-position: center;
   background-repeat: no-repeat;
+  /*overflow-x: scroll;*/
+}
+
+#eventInfo {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding: 40px;
+}
+
+.futureEventDiv {
+  width: 400px;
+  background: rgba(0,0,0,0.5);
+  color: white;
+  margin: 20px;
+  padding: 20px;
 }
 
 .contentInfo {
@@ -409,7 +549,7 @@ header #mainNav ul li {
   /*font-size: 200%;*/
   /*height: 125px;*/
   color: white;
-  font-size: 5  00%;
+  font-size: 500%;
   text-align: center;
   padding: 60px;
   text-shadow: 1px 2px black;
