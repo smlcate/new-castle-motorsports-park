@@ -4,28 +4,53 @@
 <button type="button" name="button" ng-click="updatePoints()">Update</button>
 
 
+<div id="eventDiv">
+
+  <div class="eventDivRow">
+
+    <div class="eventDivRowHeader">
+      <h3>Series</h3>
+    </div>
+    <div class="eventDivRowDisplay">
+      <div class="eventDivRowDisplayCell" ng-repeat="event in eventInfo.event_groups">
+
+        <h2>{{event.name}}</h2>
+
+      </div>
+    </div>
+
+  </div>
+
+  <div class="eventDivRow">
+
+    <div class="eventDivRowHeader">
+      <h3>Events</h3>
+    </div>
+    <div class="eventDivRowDisplay">
+      <div class="eventDivRowDisplayCell" ng-repeat="event in eventInfo.event_groups">
+
+        <h2>{{event.name}}</h2>
+
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
 <div class="" id="calendarDiv">
 
   <div class="" id="calendarNav">
 
-    <div class="" id="monthDisplay">
 
-      <h3>{{ selectedMonth_text }} {{ selectedYear }}</h3>
-
-      <nav>
-
-        <button type="button" name="button" ng-click="prevMonth()"><</button>
-        <button type="button" name="button" ng-click="nextMonth()">></button>
-
-      </nav>
-
-    </div>
 
     <div id="adminControlDiv">
 
 
       <!-- <span>Event</span><input type="checkbox" id="event" value="{{eventChkBox}}" ng-model="event" ng-change="event"> -->
       <div id="adminControlInputDiv">
+
+        <span>Name<input type="text" id="eventNameInput" value="{{eventInfo.input.name}}" ng-model="eventInfo.input.name" ng-click=""></span>
 
         <span>Repeating Event<input type="checkbox" id="seriesChkBox" value="" ng-model="eventInfo.series" ng-click="toggleSeries()"></span>
         <span ng-if="eventInfo.series===true">New Repeating Event<input type="checkbox" id="newSeriesChkBox" value="" ng-model="eventInfo.newSeries" ng-click="toggleNewSeries()"></span>
@@ -52,7 +77,6 @@
 
 
 
-        <span>Name<input type="text" id="eventNameInput" value="{{eventInfo.input.name}}" ng-model="eventInfo.input.name" ng-click=""></span>
 
         <span>Color<input type="color" id="eventColorInput" value="" ng-model="eventInfo.input.color" ng-click=""></span>
 
@@ -103,6 +127,19 @@
         {{ selectedObject }}
 
       </div> -->
+
+    </div>
+
+    <div class="" id="monthDisplay">
+
+      <h3>{{ selectedMonth_text }} {{ selectedYear }}</h3>
+
+      <nav>
+
+        <button type="button" name="button" ng-click="prevMonth()"><</button>
+        <button type="button" name="button" ng-click="nextMonth()">></button>
+
+      </nav>
 
     </div>
 

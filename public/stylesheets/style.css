@@ -163,12 +163,36 @@ header #mainNav ul li {
   align-items: center;
   /*width: 100%;*/
 }
-.pointsCellTableHeader {
+#pointsCellTableHeader {
   display: flex;
-  width: 80%;
+  width: 70%;
   margin-right: 70px;
   /*margin-left: 10px;*/
   justify-content: flex-end;
+  /*border: 1px solid black;*/
+  align-self: flex-end;
+}
+
+#pointsDates {
+  display: flex;
+  /*width: 80%;*/
+  justify-content: space-between;
+  /*border: 1px solid black;*/
+}
+
+#pointsDates li {
+  width: 46px;
+  list-style: none;
+  /*margin-left: -2px;*/
+  /*text-align: center;*/
+  -webkit-transform: rotate(60deg);
+   -moz-transform: rotate(60deg);
+   -o-transform: rotate(60deg);
+   -ms-transform: rotate(60deg);
+   transform: rotate(60deg);
+}
+#pointsDates li p {
+  margin-right: 2px;
 }
 
 .pointsCellTableHeader li {
@@ -771,6 +795,26 @@ header #mainNav ul li {
 #seriesEventDateList {
   width: 25%;
   border-left: 1px solid grey;
+}
+
+#eventDiv {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.eventDivRow {
+  display: flex;
+  flex-direction: column;
+}
+.eventDivRowDisplay {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+.eventDivRowDisplayCell {
+  border: 1px solid black;
+  width: 200px;
 }
 
 footer {

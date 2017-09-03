@@ -165,7 +165,7 @@ app.controller('mainCtrl', ['$scope', '$http', function($scope, $http) {
     $http.get('getPoints')
     .then(function(data) {
       console.log(data)
-      makePointsList(data.data[0].pointsData);
+      makePointsList(data.data[data.data.length-1].pointsData);
       $scope.selectedClass = $scope.pointsList[0];
     })
     .catch(function(err) {
@@ -283,9 +283,18 @@ app.controller('mainCtrl', ['$scope', '$http', function($scope, $http) {
 
               var point = {
                 pos: d[0],
-                score: d[1]
+                score: d[1],
+                color: 'black'
               }
-              
+
+              if (point.pos === 1) {
+                point.color = 'gold'
+              } else if (point.pos === 2) {
+                point.color = 'silver'
+              } else if (point.pos === 3) {
+                point.color = 'bronze'
+              }
+
               classData.points.push(point);
 
             } else if(d[0] !== "Position = Point Value") {
@@ -293,17 +302,52 @@ app.controller('mainCtrl', ['$scope', '$http', function($scope, $http) {
               driver.name = d[0];
 
               pp = true;
+              dq = false;
 
               for (var k = 1; k < d.length; k++) {
                 if (pp === true) {
-                  driver.positions.push(d[k]);
-                  pp = false;
+                  score = {
+                    pos: d[k],
+                    color: 'black',
+                    bold: 'normal',
+                    font: 'inherit'
+                  };
+                  if(score.pos == 1) {
+                    score.color = 'gold'
+                    score.bold = 'bold'
+                    score.font = '230%'
+                  } else if (score.pos == 2) {
+                    score.color = 'silver'
+                    score.bold = 'bold'
+                    score.font = '200%'
+                  } else if (score.pos == 3) {
+                    score.color = 'darkorange'
+                    score.bold = 'bold'
+                    score.font = '170%'
+                  } else if (score.pos == 'D') {
+                    score.pos = 'DQ'
+                    score.color = 'red'
+                    driver.points.push(0)
+                    k++;
+                    dq = true;
+                  }
+                  driver.positions.push(score);
+                  if (dq === true) {
+
+                    pp = true;
+                    dq = false;
+
+                  } else {
+
+                    pp = false;
+
+                  }
                 } else if (pp === false) {
                   driver.points.push(d[k]);
                   pp = true;
                 }
               }
-              driver.totalPoints = driver.positions[14];
+              driver.totalPoints = driver.positions[14].pos;
               driver.positions[14] = '';
               classData.drivers.push(driver);
 
@@ -687,7 +731,7 @@ app.controller('mainCtrl', ['$scope', '$http', function($scope, $http) {
 
       }
 
-      if (eventful === false) {
+      if (eventful === false && $scope.currentDaysEvents.length === 0) {
         if (today.getDay() === 1) {
           $scope.currentDaysEvents.push({
             name: 'Track Closed',

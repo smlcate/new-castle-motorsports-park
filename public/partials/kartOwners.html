@@ -335,18 +335,22 @@
     <h2>{{ selectedClass.name }}</h2>
     <div class="pointsCellTable">
 
-      <ul class="pointsCellTableHeader">
-        <li ng-repeat="date in selectedClass.dates">
-          <p>{{date}}</p>
-        </li>
-      </ul>
+      <div id="pointsCellTableHeader">
+
+        <ul id="pointsDates">
+          <li ng-repeat="date in selectedClass.dates">
+            <p>{{date}}</p>
+          </li>
+        </ul>
+
+      </div>
       <div class="pointsCellTableRow" ng-repeat="driver in selectedClass.drivers">
 
         <h3>{{driver.name}}</h3>
         <div class="driverPoints">
           <div class="driverPointsCell">
             <h5>Pos: </h5>
-            <p ng-repeat="pos in driver.positions track by $index" > {{ pos }}</p>
+            <p ng-repeat="score in driver.positions track by $index" style="color:{{score.color}};font-weight:{{score.bold}};font-size:{{score.font}}"> {{ score.pos }}</p>
 
           </div>
           <div class="driverPointsCell">
